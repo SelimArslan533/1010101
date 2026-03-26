@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "Duck Hunt",
+    "slug": "duck-hunt",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "backgroundColor": "#87CEEB",
+      "resizeMode": "contain"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.duckhunt.game"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#87CEEB"
+      },
+      "package": "com.duckhunt.game"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
