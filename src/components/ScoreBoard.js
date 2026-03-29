@@ -1,45 +1,35 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { COLORS } from '../constants';
+import { COLORS, GAME_CONFIG } from '../constants';
 
-export default function ScoreBoard({ score, round, ducksShot, totalDucks }) {
-  // Render duck indicators (shot = red, remaining = white)
-  const renderDuckIndicators = () => {
-    const indicators = [];
-    for (let i = 0; i < totalDucks; i++) {
-      indicators.push(
-        <Text
-          key={i}
-          style={[
-            styles.duckIndicator,
-            i < ducksShot && styles.duckIndicatorHit,
-          ]}
-        >
-          {i < ducksShot ? '✓' : '○'}
-        </Text>
-      );
-    }
-    return indicators;
-  };
-
+export default function ScoreBoard({ score, round, ducksShot, lives, combo }) {
   return (
     <View style={styles.container}>
       {/* Score */}
-      <View style={styles.scoreContainer}>
+      <View style={styles.section}>
         <Text style={styles.label}>PUAN</Text>
         <Text style={styles.scoreText}>{score.toLocaleString()}</Text>
       </View>
 
       {/* Round */}
-      <View style={styles.roundContainer}>
+      <View style={styles.section}>
         <Text style={styles.label}>RAUND</Text>
         <Text style={styles.roundText}>{round}/10</Text>
       </View>
 
-      {/* Duck indicators */}
-      <View style={styles.indicatorContainer}>
-        <Text style={styles.label}>ÖRDEK</Text>
-        <View style={styles.indicators}>{renderDuckIndicators()}</View>
+      {/* Lives */}
+      <View style={styles.section}>
+        <Text style={styles.label}>CAN</Text>
+        <Text style={styles.livesText}>
+          {'❤️'.repeat(Math.max(0, lives))}
+          {'🖤'.repeat(Math.max(0, GAME_CONFIG.maxLives - lives))}
+        </Text>
+      </View>
+
+      {/* Ducks shot */}
+      <View style={styles.section}>
+        <Text style={styles.label}>VURUŞ</Text>
+        <Text style={styles.shotText}>{ducksShot}</Text>
       </View>
     </View>
   );
@@ -56,26 +46,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 8,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'rgba(0,0,0,0.55)',
     borderRadius: 12,
   },
-  scoreContainer: {
-    alignItems: 'center',
-  },
-  roundContainer: {
-    alignItems: 'center',
-  },
-  indicatorContainer: {
+  section: {
     alignItems: 'center',
   },
   label: {
-    fontSize: 10,
-    color: 'rgba(255,255,255,0.7)',
+    fontSize: 9,
+    color: 'rgba(255,255,255,0.6)',
     fontWeight: '700',
     letterSpacing: 1,
   },
   scoreText: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '900',
     color: COLORS.scoreText,
     textShadowColor: 'rgba(0,0,0,0.5)',
@@ -83,20 +67,16 @@ const styles = StyleSheet.create({
     textShadowRadius: 2,
   },
   roundText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '900',
     color: COLORS.white,
   },
-  indicators: {
-    flexDirection: 'row',
-    gap: 4,
-  },
-  duckIndicator: {
+  livesText: {
     fontSize: 14,
-    color: 'rgba(255,255,255,0.5)',
-    fontWeight: 'bold',
   },
-  duckIndicatorHit: {
-    color: COLORS.red,
+  shotText: {
+    fontSize: 18,
+    fontWeight: '900',
+    color: COLORS.white,
   },
 });
